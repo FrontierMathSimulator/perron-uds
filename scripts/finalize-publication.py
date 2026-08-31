@@ -40,6 +40,42 @@ def manuscript_date() -> str:
     return match.group(1)
 
 
+def write_tests_index(tests: Path) -> None:
+    modules = sorted(tests.glob("test_*.py"))
+    if not modules:
+        raise ValueError("no focused regression tests were copied")
+    items = "\n".join(
+        f'      <li><a href="{escape(module.name)}"><code>{escape(module.name)}</code></a></li>'
+        for module in modules
+    )
+    html = f"""<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Focused regression tests</title>
+  <link rel="stylesheet" href="../../paper.css">
+</head>
+<body>
+  <main>
+    <h1>Focused regression tests</h1>
+    <p>
+      These source-level tests exercise the exact certificate and the paper's
+      focused mathematical regression controls. They do not replace the
+      symbolic proofs or extrapolate the finite certificate to larger primes.
+    </p>
+    <ul>
+{items}
+    </ul>
+    <p><a href="README.md">Read the test guide and execution command.</a></p>
+    <p><a href="../README.md">Return to the reproducibility guide.</a></p>
+  </main>
+</body>
+</html>
+"""
+    (tests / "index.html").write_text(html, encoding="utf-8", newline="\n")
+
+
 def copy_public_reproducibility_package() -> None:
     target = DOCS / "reproducibility"
     if target.exists():
@@ -55,6 +91,7 @@ def copy_public_reproducibility_package() -> None:
             target / dirname,
             ignore=shutil.ignore_patterns("__pycache__", "*.pyc", "*.pyo"),
         )
+    write_tests_index(target / "tests")
 
     shutil.copy2(ROOT / "requirements.txt", DOCS / "requirements.txt")
     shutil.copy2(ROOT / "requirements.lock", DOCS / "requirements.lock")

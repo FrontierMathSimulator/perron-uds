@@ -108,6 +108,10 @@ def main() -> int:
     require(PUBLIC_PDF.is_file(), "docs/paper.pdf is missing")
     require((DOCS / "sitemap.xml").is_file(), "docs/sitemap.xml is missing")
     require((DOCS / "requirements.lock").is_file(), "public dependency lock is missing")
+    require(
+        (DOCS / "reproducibility" / "tests" / "index.html").is_file(),
+        "public regression-test index is missing",
+    )
     for font_file in ("Gelasio-Roman-VF.ttf", "Gelasio-Italic-VF.ttf", "OFL.txt"):
         require((DOCS / "fonts" / font_file).is_file(), f"public font asset is missing: {font_file}")
     require(sha256(PDF) == sha256(PUBLIC_PDF), "public and formal PDFs differ")
@@ -168,6 +172,15 @@ def main() -> int:
         re.search(r"\.proof::before\s*\{[^}]*content:\s*none", stylesheet, re.DOTALL)
         is not None,
         "stylesheet does not suppress the theme's duplicate proof label",
+    )
+    require(
+        re.search(
+            r'math\[display=["\']block["\']\]\s*\{[^}]*overflow-x:\s*auto',
+            stylesheet,
+            re.DOTALL,
+        )
+        is not None,
+        "stylesheet does not contain wide display MathML on narrow screens",
     )
     require("\\tag{" not in manuscript, "manual equation tags are forbidden")
     require(
@@ -322,7 +335,9 @@ def main() -> int:
         if not target:
             continue
         candidate = (DOCS / target).resolve()
-        require(candidate.exists(), f"broken local HTML link: {href}")
+        if target.endswith("/"):
+            candidate /= "index.html"
+        require(candidate.is_file(), f"broken local HTML link: {href}")
 
     for asset in parser.assets:
         parsed = urlparse(asset)
@@ -332,7 +347,7 @@ def main() -> int:
         if not target:
             continue
         candidate = (DOCS / target).resolve()
-        require(candidate.exists(), f"missing local HTML asset: {asset}")
+        require(candidate.is_file(), f"missing local HTML asset: {asset}")
 
     reader = PdfReader(str(PDF))
     require(len(reader.pages) >= 15, "PDF is unexpectedly short")

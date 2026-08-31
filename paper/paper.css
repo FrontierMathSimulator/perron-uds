@@ -85,3 +85,12 @@ a {
   padding: 0.8rem 1rem;
   color: var(--paper-muted);
 }
+
+@media (max-width: 575.98px) {
+  math[display="block"] {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+}
