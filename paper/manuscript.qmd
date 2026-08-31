@@ -1,0 +1,1115 @@
+---
+title: "Perron Divisibility and Universal Divisor Saturation in Integral Fusion Rings"
+author: "John Doe"
+date: 2026-08-31
+date-format: long
+abstract: |
+  Let $K$ be an integral fusion based ring, let $K_+$ be its based positive cone, and let $d:K\to\mathbb Z$ be its positive dimension homomorphism. We prove a Perron divisor-lifting theorem: if $x\in K_+$ has primitive left multiplication, and a positive element $y$ is a unit modulo the regular line $\mathbb Z\Omega$, then $y$ divides all sufficiently large powers $x^N$ for which $d(y)$ divides $d(x)^N$, with a complementary factor in $K_+$. This separates an integral quotient-unit problem from an eventual positivity problem. For cyclic group rings the quotient units supplied by geometric sums, together with modular nilpotence on cyclic $p$-power quotients, produce every smooth augmentation divisor. We formalize this behavior as universal divisor saturation (UDS), prove quotient inheritance for finite groups, and classify it for finite abelian groups. The exact result is
+  $$
+  \operatorname{UDS}(\mathbb Z[G])
+  \quad\Longleftrightarrow\quad
+  G\text{ is cyclic or }G\cong C_2\times C_2.
+  $$
+  The mixed-Sylow obstruction reduces augmentation three in $C_2^2\times C_q$ to four signed cyclotomic-unit channels. A classical unitary-unit input, with a self-contained Parseval proof, yields the all-prime classification
+  $N(1+\zeta_q^r-\zeta_q^s)=1$ exactly when $s=0$, $s=r$, or $r=2s$ for primes $q\ge5$, excluding simultaneous unitness of all four channels. The remaining prime $q=3$ is handled by a deterministic exhaustive augmentation-five certificate over 4,368 coefficient vectors. The paper distinguishes symbolic proofs from regression controls and does not claim a nonabelian classification, Morita invariance, or tensor-product stability.
+keywords:
+  - integral fusion rings
+  - positive group semirings
+  - Perron-Frobenius theory
+  - integral group rings
+  - cyclotomic units
+  - finite abelian groups
+  - universal divisor saturation
+license: CC0 1.0 Universal
+bibliography: references.bib
+csl: american-mathematical-society.csl
+link-citations: true
+reference-section-title: References
+format:
+  html:
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    anchor-sections: true
+    html-math-method: mathml
+    code-fold: false
+    theme: cosmo
+    css: paper.css
+    include-in-header: html-head.html
+    format-links: false
+  typst:
+    toc: true
+    number-sections: true
+    section-numbering: "1.1"
+    papersize: us-letter
+    margin:
+      x: 1in
+      y: 0.75in
+    fontsize: 10pt
+    mainfont: Gelasio
+    font-paths: fonts
+    keep-typ: true
+    pdf-standard: "1.7"
+---
+
+# Introduction {#sec-introduction}
+
+**Editions and artifacts:** [download the formal PDF](paper.pdf), read the
+[Markdown edition](paper.md), or inspect the
+[complete reproducibility package](reproducibility/README.md).
+
+Positive factorization in a based ring has two logically different parts. An exact factorization must first exist in the integral lattice, and the signed complementary factor must then become positive. In the setting of an integral fusion based ring, the regular element isolates the first problem in a finite-rank quotient, while Perron-Frobenius mixing solves the second. This paper develops that mechanism and uses it to classify a uniform divisor property for finite abelian group rings.
+
+Let $K_+$ denote the nonnegative span of the distinguished basis of an integral fusion based ring $K$. For $x\in K_+$ with primitive multiplication and $m>0$, ask whether some power factors as
+
+$$
+x^N=yz,\qquad y,z\in K_+,\qquad d(y)=m.
+$$ {#eq-basic-factorization}
+
+Applying $d$ shows immediately that every prime divisor of $m$ must divide $d(x)$. We call such an integer $d(x)$-smooth. Universal divisor saturation asks whether this elementary obstruction is the only obstruction, uniformly for every primitive $x$.
+
+The first main result is a general lifting theorem. Write
+
+$$
+\Omega=\sum_i d_i b_i,\qquad D=d(\Omega)=\sum_i d_i^2,
+$$ {#eq-regular-element-intro}
+
+where $b_i$ are the simple basis elements and $d_i=d(b_i)$. If $y\in K_+$ has dimension $M$ and its class is a unit in $A_K=K/\mathbb Z\Omega$, choose $v\in K$ and $k\in\mathbb Z$ with $yv=1+k\Omega$. For every $N$ with $M\mid d(x)^N$, the signed element
+
+$$
+z_N=vx^N-\frac{k d(x)^N}{M}\Omega
+$$ {#eq-lift-intro}
+
+satisfies $yz_N=x^N$. The right-multiplication Perron limit shows that $d(x)^{-N}z_N$ converges coefficientwise to $\Omega/(MD)$, so $z_N$ is positive for all sufficiently large admissible $N$.
+
+This motivates the arithmetic invariant
+
+$$
+U_+(K)=\{d(y)>0:y\in K_+,\ [y]\in A_K^\times\}.
+$$ {#eq-uplus-intro}
+
+The distinction between integral unit membership and rational invertibility is essential. A nonzero determinant over $\mathbb Q$ does not imply determinant $\pm1$ on the quotient lattice and therefore does not imply membership in $U_+(K)$.
+
+Two further interfaces sharpen this separation. The set $U_+(K)$ is a finite union of arithmetic tails, controlled by the image of the quotient-unit group modulo $D$, while exact divisibility by a chosen positive factor is equivalent to orbit-vanishing in the cokernel $K/yK$. The latter orbit is finite when left multiplication by $y$ is rationally invertible, but ordinary UDS also permits rationally singular factors.
+
+For cyclic group rings, coprime geometric sums and modular nilpotence on cyclic $p$-power quotients provide the missing quotient-unit and ramified factors. This gives a complete positive semiring theorem: every primitive $x\in\mathbb N[C_n]$ has positive divisors of exactly the $d(x)$-smooth augmentations.
+
+The second main result classifies the uniform property for finite abelian groups.
+
+::: {#res-main .result}
+**Theorem A (finite-abelian UDS classification).** Let $G$ be a finite abelian group, including the trivial group. Then
+
+$$
+\operatorname{UDS}(\mathbb Z[G])
+\quad\Longleftrightarrow\quad
+G\text{ is cyclic or }G\cong C_2\times C_2.
+$$
+:::
+
+The proof has five structural stages.
+
+1. UDS forces $U_+(K)$ to contain every positive integer coprime to $D$.
+2. For finite $p$-groups, nilpotence of the modular augmentation ideal turns that necessary condition into a sufficient one.
+3. The abelian $p$-groups satisfying UDS are exactly the cyclic groups and $C_2^2$.
+4. UDS descends along finite-group quotients, reducing the remaining abelian case to $C_2^2\times C_q$ for odd primes $q$.
+5. For $q\ge5$, augmentation three is obstructed symbolically by a signed-trinomial norm theorem. For $q=3$, augmentation five is excluded by an exact finite certificate.
+
+The symbolic obstruction uses the classical classification of unitary units in integral group rings [@Sehgal1993, Proposition 1.3; @BovdiParmenter1997, p. 369]. In the cyclic augmentation-one specialization, if $a\in\mathbb Z[C_q]^\times$ and $*$ is inversion, then the unitary ratio $a(a^*)^{-1}$ is a group monomial. A short Parseval proof is included below to keep this interface self-contained. Applying it to $1+t^r-t^s$ yields the exact norm-one classification
+
+$$
+N_{\mathbb Q(\zeta_q)/\mathbb Q}(1+\zeta_q^r-\zeta_q^s)=1
+\Longleftrightarrow s=0,\ s=r,\text{ or }r=2s,
+$$ {#eq-signed-summary}
+
+for every prime $q\ge5$, including all support collisions.
+
+The paper uses standard Frobenius-Perron dimension theory for fusion rings and categories [@ENO2005], the classical primitive-matrix convergence of Perron and Frobenius [@Perron1907; @Frobenius1912], and the modular group-ring nilpotence originating in Jennings [@Jennings1941]. The positive divisor-lifting and UDS arguments are proved here from their hypotheses. Higman's work on integral group-ring units and Washington's treatment of cyclotomic units provide additional context [@Higman1940; @Washington1997]. We make no priority claim.
+
+::: {.boundary}
+**Scope.** UDS is a uniform property of a dimensioned based semiring. It is not asserted to be invariant under categorical Morita equivalence, it is not stable under tensor products, and it is not a synonym for the numerical index image of one engineered chain. No classification is claimed for nonabelian finite groups.
+:::
+
+# Integral fusion based rings and their regular quotients {#sec-framework}
+
+## Based-ring conventions {#sec-conventions}
+
+An **integral fusion based ring** is a unital ring $K$ that is free of finite rank over $\mathbb Z$, with a distinguished basis
+
+$$
+B=\{b_0=1,b_1,\ldots,b_{r-1}\},
+$$
+
+nonnegative integral structure constants
+
+$$
+b_i b_j=\sum_k N_{ij}^k b_k,\qquad N_{ij}^k\in\mathbb N,
+$$
+
+an involution $b_i\mapsto b_i^*$ satisfying the usual Frobenius reciprocity identities, and a ring homomorphism
+
+$$
+d:K\longrightarrow\mathbb Z
+$$
+
+with $d_i=d(b_i)>0$. Integrality means that all $d_i$ are integers. The **positive cone** is $K_+=\bigoplus_i\mathbb N b_i$. The coefficient vector of $a\in K$ in the ordered basis $B$ is denoted $c(a)$.
+
+For $a\in K$, let $L_a$ be the matrix of left multiplication whose $j$th column is $c(ab_j)$, and let $R_a$ be the corresponding right multiplication matrix. A nonnegative square matrix is **primitive** if one of its positive powers is strictly positive. We call $x\in K_+$ primitive when $L_x$ is primitive. The right matrix is then primitive as well; this will be proved below rather than assumed.
+
+For a positive integer $n$, a positive integer $m$ is **$n$-smooth** if every rational prime dividing $m$ also divides $n$. The integer $1$ is $n$-smooth for every $n$.
+
+## The regular element {#sec-regular-element}
+
+Define
+
+$$
+\Omega=\sum_i d_i b_i,\qquad D=d(\Omega)=\sum_i d_i^2.
+$$
+
+::: {#res-regular .result}
+**Lemma 2.1 (regular-element identities).** For every $a\in K$,
+
+$$
+a\Omega=d(a)\Omega,\qquad \Omega a=d(a)\Omega,
+\qquad \Omega^2=D\Omega.
+$$ {#eq-regular-identities}
+
+In particular, $\mathbb Z\Omega$ is a central two-sided ideal.
+:::
+
+::: {.proof}
+It is enough to take $a=b_i$. The coefficient of $b_k$ in $b_i\Omega$ is
+
+$$
+\sum_j d_jN_{ij}^k
+=\sum_j d_jN_{i^*k}^j
+=d_i d_k,
+$$
+
+where the middle equality is Frobenius reciprocity and the last is multiplicativity of $d$. Thus $b_i\Omega=d_i\Omega$. The right-handed calculation is identical. Linearity gives the first two identities, and substituting $a=\Omega$ gives the third. Integrality of the $d_i$ is exactly what places $\Omega$ in the integral lattice.
+:::
+
+The quotient
+
+$$
+A_K=K/\mathbb Z\Omega
+$$ {#eq-regular-quotient}
+
+is therefore a ring even when $K$ is noncommutative. Since the coefficient of $b_0$ in $\Omega$ is one, $A_K$ is a free abelian group of rank $r-1$. Define
+
+$$
+U_+(K)=\{d(y):y\in K_+,\ d(y)>0,\ [y]\in A_K^\times\}.
+$$ {#eq-uplus-def}
+
+If $yv=1+k\Omega$ and $M=d(y)$, applying $d$ gives
+
+$$
+M d(v)=1+kD.
+$$ {#eq-dimension-unit-relation}
+
+It follows that every $M\in U_+(K)$ is coprime to $D$. Conversely, the regular factors
+
+$$
+1+k\Omega\quad\text{and}\quad k\Omega-1
+$$
+
+are positive when their dimensions are positive and represent $+1$ and $-1$ in $A_K$. Hence
+
+$$
+\{M>0:M\equiv\pm1\pmod D\}
+\subseteq U_+(K)
+\subseteq\{M>0:\gcd(M,D)=1\}.
+$$ {#eq-uplus-sandwich}
+
+Assume now that $D>1$. Because $d(\Omega)=D$, dimension modulo $D$ descends to a ring homomorphism
+
+$$
+\bar d:A_K\longrightarrow\mathbb Z/D\mathbb Z.
+$$
+
+Set
+
+$$
+H_K=\bar d(A_K^\times)\le (\mathbb Z/D\mathbb Z)^\times.
+$$ {#eq-unit-residue-subgroup}
+
+::: {#res-uplus-tails .result}
+**Theorem 2.2 (arithmetic-tail normal form).** For each $r\in H_K$, let $\mu_r$ be the least positive dimension of a positive lift of a quotient unit whose dimension is congruent to $r$ modulo $D$. Then
+
+$$
+U_+(K)=\bigcup_{r\in H_K}\{\mu_r+tD:t\ge0\}.
+$$ {#eq-arithmetic-tails}
+:::
+
+::: {.proof}
+Choose a unit class $u\in A_K^\times$ with $\bar d(u)=r$ and any lift $a\in K$. Since every coefficient of $\Omega$ is positive, $a+t\Omega$ belongs to $K_+$ for all sufficiently large integers $t$. Its quotient class is still $u$, so positive lifts exist and the well-ordering principle defines $\mu_r$.
+
+A positive lift of dimension $\mu_r$ remains positive after adding $t\Omega$, producing every $\mu_r+tD$. Conversely, if $M\in U_+(K)$, then its residue $r$ belongs to $H_K$, it satisfies $M\ge\mu_r$, and $M\equiv\mu_r\pmod D$. Hence $M=\mu_r+tD$ for some $t\ge0$.
+:::
+
+The **residue-saturation index**
+
+$$
+\sigma_{\mathrm{res}}(K)=[(\mathbb Z/D\mathbb Z)^\times:H_K]
+$$ {#eq-residue-saturation-index}
+
+measures the missing unit residue classes. The natural density of $U_+(K)$ in the positive integers is $|H_K|/D$, and its relative density among the integers coprime to $D$ is $1/\sigma_{\mathrm{res}}(K)$. Thus the asymptotic shape of $U_+(K)$ is uniform; determining $H_K$ and the initial thresholds $\mu_r$ remains ring-specific.
+
+Neither inclusion may be replaced by rational invertibility. The definition uses the unit group of the integral order $A_K$, equivalently determinant $\pm1$ on its free lattice.
+
+## Universal divisor saturation {#sec-uds-definition}
+
+::: {#res-uds-definition .result}
+**Definition 2.3 (UDS).** An integral fusion based ring $K$ has **universal divisor saturation**, written $\operatorname{UDS}(K)$, if for every primitive $x\in K_+$ and every positive $d(x)$-smooth integer $m$, there exist $N\ge1$ and $y,z\in K_+$ such that
+
+$$
+x^N=yz,\qquad d(y)=m.
+$$ {#eq-uds-def}
+:::
+
+This definition is left-right asymmetric only in the displayed placement of $y$. Applying the involution transports the property to the opposite ring. For a commutative group ring the distinction disappears.
+
+For $K=\mathbb Z$ we use the rank-one convention $D=1$ and $A_K=0$. Every positive integer is a positive scalar, and UDS is immediate. This includes the trivial group in Theorem A.
+
+# Perron divisor lifting {#sec-perron-lifting}
+
+## Correct left and right Perron limits {#sec-perron-conventions}
+
+Let $d=(d_i)$ be the column vector of basis dimensions. Lemma 2.1 and multiplicativity of $d$ imply
+
+$$
+L_xd=d(x)d,\qquad d^TL_x=d(x)d^T.
+$$ {#eq-left-perron}
+
+Let $J$ be the permutation matrix induced by $b_i\mapsto b_i^*$. Frobenius reciprocity gives
+
+$$
+R_x=JL_{x^*}J=JL_x^TJ.
+$$ {#eq-right-left}
+
+Thus $R_x$ is primitive whenever $L_x$ is primitive, with the same Perron eigenvalue $\delta=d(x)$ and Perron vector $d$. Put
+
+$$
+P=\frac{dd^T}{D}.
+$$
+
+The primitive Perron-Frobenius theorem [@Perron1907; @Frobenius1912] yields
+
+$$
+\delta^{-N}L_x^N\longrightarrow P,
+\qquad
+\delta^{-N}R_x^N\longrightarrow P.
+$$ {#eq-perron-limits}
+
+Starting with the tensor unit gives $\delta^{-N}x^N\to\Omega/D$. More importantly for the factor constructed below, starting with an arbitrary signed $v$ and multiplying on the right gives
+
+$$
+\delta^{-N}v x^N\longrightarrow\frac{d(v)}{D}\Omega.
+$$ {#eq-right-perron-limit}
+
+Using $L_x$ in the last display would be a convention error when $K$ is noncommutative or $x$ is not self-dual.
+
+## The lifting theorem {#sec-lifting-theorem}
+
+::: {#res-perron-lifting .result}
+**Theorem 3.1 (Perron divisor lifting).** Let $K$ be an integral fusion based ring and let $x\in K_+$ have primitive left multiplication matrix. Put $\delta=d(x)$. Suppose that $y\in K_+$ has $M=d(y)>0$ and that
+
+$$
+yv=1+k\Omega
+$$
+
+for some $v\in K$ and $k\in\mathbb Z$. Whenever $M\mid\delta^N$, define
+
+$$
+z_N=vx^N-\frac{k\delta^N}{M}\Omega.
+$$ {#eq-zN}
+
+Then $yz_N=x^N$, and $z_N\in K_+$ for every sufficiently large admissible $N$. No commutativity or self-duality hypothesis is required.
+:::
+
+::: {.proof}
+The divisibility hypothesis makes $z_N$ integral. By centrality of $\Omega$ and Lemma 2.1,
+
+$$
+\begin{aligned}
+yz_N
+&=(1+k\Omega)x^N-
+\frac{k\delta^N}{M}y\Omega\\
+&=x^N+k\delta^N\Omega-
+\frac{k\delta^N}{M}M\Omega=x^N.
+\end{aligned}
+$$
+
+Applying $d$ to $yv=1+k\Omega$ gives $Md(v)=1+kD$. Combining this identity with the right Perron limit in @eq-right-perron-limit gives
+
+$$
+\delta^{-N}z_N
+\longrightarrow
+\left(\frac{d(v)}D-\frac{k}{M}\right)\Omega
+=\frac1{MD}\Omega.
+$$ {#eq-positive-limit}
+
+Every coefficient in the limit is strictly positive. Coefficientwise convergence therefore implies $z_N\in K_+$, indeed $z_N$ is strictly positive, for all sufficiently large admissible $N$.
+:::
+
+The theorem also gives a quantitative threshold. Set $A=R_x/\delta$ and $E=A-P$. For any $\theta$ with $\rho(E)<\theta<1$,
+
+$$
+C_\theta=\sup_{N\ge0}\theta^{-N}\lVert E^N\rVert_\infty<\infty.
+$$
+
+Since the smallest coordinate of the limit in @eq-positive-limit is $1/(MD)$, it is sufficient that
+
+$$
+C_\theta\lVert c(v)\rVert_\infty\theta^N<\frac1{MD}.
+$$ {#eq-spectral-bound}
+
+This explicit estimate is optional for existence, but it makes the separate roles of arithmetic and mixing transparent.
+
+# Cyclic eventual divisor saturation {#sec-cyclic}
+
+Let $C_n=\langle g\rangle$, write
+
+$$
+R_n=1+g+\cdots+g^{n-1},
+$$
+
+and let $\varepsilon:\mathbb Z[C_n]\to\mathbb Z$ be augmentation. In a pointed group ring $d=\varepsilon$, $\Omega=R_n$, and $D=n$.
+
+::: {#res-cyclic .result}
+**Theorem 4.1 (cyclic divisor saturation).** Let $x\in\mathbb N[C_n]$ have primitive convolution matrix and put $d=\varepsilon(x)$. Then
+
+$$
+\{\varepsilon(y)>0:x^N=yz\text{ for some }N\ge1,
+\ y,z\in\mathbb N[C_n]\}
+$$
+
+is exactly the set of positive $d$-smooth integers.
+:::
+
+Necessity follows by applying augmentation to a factorization. If $n=1$, then $x=d\cdot1$, and for every $d$-smooth $M$ one can choose $N$ with $M\mid d^N$ and write
+
+$$
+x^N=(M\cdot1)((d^N/M)\cdot1).
+$$
+
+Assume henceforth that $n>1$. The remainder of this section proves sufficiency by separating primes coprime to $n$ from primes ramified in $n$.
+
+## Coprime geometric extraction {#sec-coprime-extraction}
+
+Let $M$ be coprime to $n$ and suppose $M\mid d^{N_0}$. Choose $1\le r<n$ and $k\ge0$ with $Mr=1+kn$. Define
+
+$$
+Y_M(g)=\sum_{i=0}^{M-1}g^i,
+\qquad
+V=\sum_{j=0}^{r-1}g^{Mj}.
+$$
+
+The geometric-series identity, reduced modulo $g^n=1$, is
+
+$$
+Y_M(g)V=Y_{Mr}(g)=1+kR_n.
+$$ {#eq-geometric-inverse}
+
+Theorem 3.1 applies with $y=Y_M(g)$ and shows that $Y_M(g)$ is a positive divisor of all sufficiently large powers $x^N$ for which $M\mid d^N$.
+
+For completeness, a direct Fourier bound is also available. If
+
+$$
+\rho=\max_{\chi\ne1}|\widehat{x}(\chi)|<d,
+\qquad
+B=\sum_{\chi\ne1}|\widehat V(\chi)|,
+$$
+
+then the complementary coefficient at every group element is bounded below by
+
+$$
+\frac{d^N}{n}\left(\frac1M-B(\rho/d)^N\right).
+$$ {#eq-cyclic-fourier-bound}
+
+Thus positivity is explicit once $MB(\rho/d)^N<1$.
+
+## Ramified prime extraction {#sec-ramified-extraction}
+
+First suppose $n=p^r$. In characteristic $p$,
+
+$$
+\mathbb F_p[C_{p^r}]
+\cong\mathbb F_p[u]/(u^{p^r}),\qquad u=g-1.
+$$ {#eq-cyclic-modular}
+
+If $p\mid d$, the reduction of $x$ lies in the augmentation ideal $(u)$, so $\bar x^{p^r}=0$. Hence every coefficient of $x^{p^r}$ is divisible by $p$, and
+
+$$
+x^{p^r}=(p\cdot1)z,\qquad z\in\mathbb N[C_{p^r}].
+$$ {#eq-scalar-extraction}
+
+For general cyclic $n$, write $n=p^r m$ with $(p,m)=1$ and let $h=g^{p^r}$, so $H=\langle h\rangle$ has order $m$. When $m>1$, choose $s,k$ with $ps=1+km$ and set
+
+$$
+y=\sum_{i=0}^{p-1}h^i,
+\qquad
+v=\sum_{j=0}^{s-1}h^{pj},
+\qquad
+R_H=\sum_{a=0}^{m-1}h^a.
+$$
+
+Then
+
+$$
+yv=1+kR_H,\qquad yR_H=pR_H.
+$$ {#eq-subgroup-geometric}
+
+Let $\pi:\mathbb Z[C_n]\to\mathbb Z[C_{p^r}]$ quotient by $H$. The coefficients of $R_Hx^N$ are the coset sums of $\pi(x^N)$. Because $p\mid d$, the reduction of $\pi(x)$ lies in the nilpotent augmentation ideal of $\mathbb F_p[C_{p^r}]$. Consequently
+
+$$
+w_N=\frac1pR_Hx^N\in\mathbb N[C_n]\qquad(N\ge p^r).
+$$ {#eq-coset-average}
+
+Define
+
+$$
+z_N=vx^N-kw_N.
+$$
+
+Using @eq-subgroup-geometric and @eq-coset-average gives the exact factorization $yz_N=x^N$. The signed multiplier has augmentation
+
+$$
+\varepsilon(v)-\frac{k}{p}\varepsilon(R_H)
+=s-\frac{km}{p}=\frac1p,
+$$
+
+so Perron-Fourier mixing yields
+
+$$
+d^{-N}z_N\longrightarrow\frac1{pn}R_n.
+$$ {#eq-ramified-limit}
+
+Thus $z_N$ is positive for all sufficiently large $N$. When $m=1$, @eq-scalar-extraction supplies the factor directly.
+
+This construction is stronger than scalar extraction. For example, in $\mathbb N[C_6]$,
+
+$$
+x=g^2+g^3+g^4+g^5=(1+g^2)(g^2+g^3).
+$$
+
+The mod-two reduction of $x$ is not nilpotent in $\mathbb F_2[C_6]$, so no scalar factor $2\cdot1$ divides a power, but the positive dimension-two factor $1+g^2$ already divides $x$.
+
+## Combining primes {#sec-combining-primes}
+
+For each prime $p\mid d$, the coprime or ramified construction gives
+
+$$
+x^{N_p}=y_pz_p,\qquad \varepsilon(y_p)=p.
+$$
+
+If $M=\prod_pp^{e_p}$ is $d$-smooth, commutativity gives
+
+$$
+x^{\sum_pe_pN_p}
+=\left(\prod_py_p^{e_p}\right)
+ \left(\prod_pz_p^{e_p}\right),
+$$
+
+and the first factor has augmentation $M$. This completes the proof of Theorem 4.1.
+
+# Abstract UDS structure {#sec-abstract-uds}
+
+## Quotient-unit necessity {#sec-quotient-necessity}
+
+::: {#res-uplus-necessary .result}
+**Theorem 5.1 (maximal coprime quotient units are necessary).** If $K$ has UDS, then
+
+$$
+U_+(K)=\{M>0:\gcd(M,D)=1\}.
+$$ {#eq-max-uplus}
+:::
+
+::: {.proof}
+The inclusion from left to right is @eq-dimension-unit-relation. Conversely, fix $M>1$ coprime to $D$. Choose $L>0$ with $ML\equiv1\pmod D$, and put
+
+$$
+X=1+\frac{ML-1}{D}\Omega.
+$$
+
+The element $X$ is strictly positive, hence primitive; it has dimension $ML$ and represents $1$ in $A_K$. Since $M$ is $ML$-smooth, UDS gives $X^N=yz$ with $d(y)=M$. Reducing modulo $\mathbb Z\Omega$ gives $[y][z]=1$. Multiplication by $[y]$ on the finite free lattice $A_K$ has an integral one-sided inverse, so its determinant is $\pm1$ and the inverse is two-sided. Thus $[y]$ is a unit and $M\in U_+(K)$.
+:::
+
+The freeness of $A_K$ is load-bearing. A one-sided inverse in a rational semisimple algebra would not by itself establish unit membership in the integral order.
+
+## A sufficient ramification criterion {#sec-nilpotent-criterion}
+
+For a prime $p$, set
+
+$$
+K_p=K\otimes\mathbb F_p,
+\qquad
+I_p=\ker(d\bmod p).
+$$ {#eq-modular-kernel}
+
+::: {#res-nilpotent .result}
+**Theorem 5.2 (nilpotent ramification criterion).** Suppose that
+
+1. $U_+(K)$ contains every positive integer coprime to $D$; and
+2. $I_p$ is nilpotent for every prime $p\mid D$.
+
+Then $K$ has UDS.
+:::
+
+::: {.proof}
+Let $m$ be $d(x)$-smooth and write $m=ur$, where $(u,D)=1$ and every prime dividing $r$ divides $D$. The first hypothesis and Theorem 3.1 extract a positive quotient-unit factor $y$ of dimension $u$:
+
+$$
+x^N=yz_N,
+\qquad
+z_N=vx^N-k\frac{d(x)^N}{u}\Omega.
+$$
+
+If $I_p^{\nu_p}=0$ and $p\mid d(x)$, then $x^{\nu_p}$ is coefficientwise divisible by $p$. Taking sufficiently high powers gives the required $p$-adic divisibility of $x^N$ for every $p\mid r$. At the same time, $d(x)^N/u$ is divisible by $r$. Choose $N$ beyond the Perron positivity threshold and with both divisibilities. Then $z_N=rz_N'$ with $z_N'\in K_+$, and
+
+$$
+x^N=(ry)z_N',\qquad d(ry)=ru=m.
+$$
+:::
+
+The criterion is sufficient, not necessary. Composite cyclic groups can require the proper quotient-and-averaging argument of Section 4 even when the full ideal $I_p$ is not nilpotent.
+
+## Exact orbit formulation {#sec-exact-orbit}
+
+For $y\in K_+$, put $C_y=K/yK$. The subgroup $yK$ is a right ideal, so right multiplication by $x$ induces an endomorphism $\bar R_x$ of $C_y$.
+
+::: {#res-exact-orbit .result}
+**Theorem 5.3 (exact extractor orbit).** For $x,y\in K_+$ and $N\ge0$,
+
+$$
+x^N\in yK
+\quad\Longleftrightarrow\quad
+\bar R_x^N[1]=0\text{ in }C_y.
+$$ {#eq-extractor-orbit}
+
+If $x$ is primitive and either condition holds, then $y$ positively divides $x^{N+t}$ for every sufficiently large $t$.
+:::
+
+::: {.proof}
+By construction, $\bar R_x^N[1]=[x^N]$, so the displayed equivalence is exact. If $x^N=yz$ for some $z\in K$, then $d(z)=d(x)^N/d(y)>0$. The right Perron limit gives
+
+$$
+d(x)^{-t}zx^t\longrightarrow\frac{d(z)}D\Omega
+$$ {#eq-orbit-perron}
+
+coefficientwise. Its limit is strictly positive, so $zx^t\in K_+$ for every sufficiently large $t$, and $x^{N+t}=y(zx^t)$ is the required positive factorization.
+:::
+
+Consequently, UDS is equivalently the assertion that for every primitive $x$ and every positive $d(x)$-smooth $m$, some $y\in K_+$ with $d(y)=m$ has a $[1]$-orbit under $\bar R_x$ that reaches zero. If $L_y$ is invertible over $\mathbb Q$, then $C_y$ is finite of order $|\det L_y|$, and this orbit question is finite. This does not make general UDS a uniform finite-state problem: the factor $y$ may depend on the input, and useful factors may be rationally singular, in which case $C_y$ is infinite.
+
+## Finite $p$-groups {#sec-p-groups}
+
+For a finite $p$-group $G$, the augmentation ideal of $\mathbb F_p[G]$ is the Jacobson radical and is nilpotent; this is a classical consequence of modular group-ring theory [@Jennings1941]. The preceding two theorems therefore give an exact local-global criterion.
+
+::: {#res-p-group .result}
+**Corollary 5.4.** For every finite $p$-group $G$,
+
+$$
+\operatorname{UDS}(\mathbb Z[G])
+\Longleftrightarrow
+U_+(G)\text{ contains every positive integer coprime to }p.
+$$
+:::
+
+# Abelian $p$-groups {#sec-abelian-p-groups}
+
+## A low-exponent Fourier rigidity lemma {#sec-fourier-rigidity}
+
+Let $G$ be finite abelian of order $h$, and let $y=\sum_g y_gg\in\mathbb N[G]$. Character decomposition over $\mathbb C$ diagonalizes multiplication [@CurtisReiner1981]. On the quotient by the regular line,
+
+$$
+\det(m_{[y]})=\prod_{\chi\ne1}\chi(y).
+$$ {#eq-abelian-det}
+
+::: {#res-fourier-rigidity .result}
+**Lemma 6.1 (Fourier rigidity).** Suppose that $|\chi(y)|=1$ for every nontrivial character $\chi$ of $G$. Then
+
+$$
+y=kR_G+g_0
+\quad\text{or}\quad
+y=kR_G-g_0,
+$$
+
+with coefficients nonnegative in the second case.
+:::
+
+::: {.proof}
+For $a\ne e$, Fourier Parseval applied to the difference $y_g-y_{ag}$ gives
+
+$$
+\sum_g(y_g-y_{ag})^2=2.
+$$ {#eq-difference-parseval}
+
+Thus the integral coefficients have range one, so $y=kR_G+1_S$ for some subset $S\subseteq G$, after changing $k$ if necessary. Substitution into @eq-difference-parseval gives $|S\triangle aS|=2$, or $|S\cap aS|=|S|-1$. Summing over $a\ne e$ gives
+
+$$
+(|S|-1)(|S|-(h-1))=0.
+$$
+
+Hence $|S|=1$ or $h-1$, which are the two displayed forms.
+:::
+
+If the exponent of $G$ divides $2$, $3$, $4$, or $6$, each nontrivial cyclotomic component is $\mathbb Q$, $\mathbb Q(i)$, or $\mathbb Q(\zeta_3)$. Units in their integer rings have absolute value one. Combining @eq-abelian-det with Lemma 6.1 gives
+
+$$
+U_+(G)=\{M>0:M\equiv\pm1\pmod{|G|}\}.
+$$ {#eq-low-exponent-uplus}
+
+In particular,
+
+$$
+U_+(C_2^2)=\{M>0:M\text{ odd}\},
+$$
+
+while $2\notin U_+(C_3^2)$ and $3\notin U_+(C_2\times C_4)$.
+
+## Classification at one prime {#sec-p-classification}
+
+::: {#res-abelian-p .result}
+**Theorem 6.2 (abelian $p$-groups).** A finite abelian $p$-group has UDS exactly when it is cyclic or isomorphic to $C_2^2$.
+:::
+
+::: {.proof}
+Cyclic groups have UDS by Theorem 4.1. For $C_2^2$, @eq-low-exponent-uplus supplies every odd quotient-unit dimension, while modular nilpotence supplies powers of two; Corollary 5.4 proves UDS.
+
+Now let $p$ be odd and $G$ noncyclic. A positive element of augmentation two is either $2g$ or $g+h$. In the second case, $\langle hg^{-1}\rangle$ is a proper subgroup because $G$ is not cyclic, so there is a nontrivial character $\chi$ trivial on $hg^{-1}$. Then $\chi(g+h)=2\chi(g)$; the same absolute-value-two obstruction is immediate for $2g$. Such an element cannot be a quotient-lattice unit. Hence $2\notin U_+(G)$, and Corollary 5.4 excludes UDS.
+
+Finally suppose $p=2$. Every noncyclic abelian $2$-group other than $C_2^2$ has a quotient $C_2^3$ or $C_4\times C_2$. Both have order eight and exponent at most four, so @eq-low-exponent-uplus gives $3\notin U_+$ for the quotient. A positive quotient unit maps to a positive quotient unit under a group quotient, so $3\notin U_+(G)$. Corollary 5.4 again excludes UDS.
+:::
+
+The theorem classifies UDS without classifying all of $U_+(G)$ for abelian $p$-groups with $p\ge5$, where real cyclotomic units intervene.
+
+# Quotient inheritance and the mixed-Sylow reduction {#sec-quotient-reduction}
+
+## Quotient inheritance {#sec-quotient-inheritance}
+
+::: {#res-quotient .result}
+**Theorem 7.1 (UDS descends to finite-group quotients).** Let $\pi:G\twoheadrightarrow Q$ be a surjection of finite groups. If $\mathbb Z[G]$ has UDS, then $\mathbb Z[Q]$ has UDS.
+:::
+
+::: {.proof}
+If $Q$ is trivial, write $x=d\cdot1$. For every $d$-smooth $m$, choose $N$ with $m\mid d^N$ and factor $x^N=(m\cdot1)((d^N/m)\cdot1)$. Thus assume $|Q|>1$.
+
+Fix primitive $x\in\mathbb N[Q]$ and a positive $d(x)$-smooth integer $m$. Let $h=|\ker\pi|$. Some power $u=x^a$ is strictly positive. Hence $u\ge R_Q$ coefficientwise, so $u^k\ge R_Q^k=|Q|^{k-1}R_Q$. Choosing $k$ with $|Q|^{k-1}\ge h$ shows that $x^t$, for $t=ak$, has every coefficient at least $h$.
+
+Distribute the coefficient of $x^t$ at each $q\in Q$ into $h$ positive integer summands, one at each point of $\pi^{-1}(q)$. This constructs a strictly positive $\widetilde x\in\mathbb N[G]$ such that
+
+$$
+\pi_*(\widetilde x)=x^t,
+\qquad
+\varepsilon(\widetilde x)=d(x)^t.
+$$
+
+The lift is primitive, and $m$ is $d(\widetilde x)$-smooth. UDS upstairs gives
+
+$$
+\widetilde x^N=yz,
+\qquad
+\varepsilon(y)=m.
+$$
+
+Applying the positive augmentation-preserving map $\pi_*$ gives
+
+$$
+x^{tN}=\pi_*(y)\pi_*(z),
+\qquad
+\varepsilon(\pi_*(y))=m.
+$$
+
+This is the required factorization in $\mathbb N[Q]$.
+:::
+
+The strict fiberwise lift is important: an arbitrary positive lift of $x$ need not be primitive. The implication cannot be reversed. For example, $C_2\times C_4$ is not UDS although its proper cyclic quotients are UDS.
+
+## Reduction to one prime family {#sec-mixed-reduction}
+
+Write a finite abelian group as $G=\prod_pG_p$. If $G$ is UDS, each Sylow quotient $G_p$ is UDS. Theorem 6.2 therefore forces every odd $G_p$ to be cyclic, while $G_2$ is cyclic or $C_2^2$. The product of cyclic Sylow groups is cyclic. Thus the only remaining noncyclic shape is
+
+$$
+G=C_2^2\times C_m,
+\qquad m>1\text{ odd and cyclic}.
+$$ {#eq-mixed-shape}
+
+For any odd prime $q\mid m$, this group has quotient $C_2^2\times C_q$. By Theorem 7.1, it suffices to exclude UDS for that prime family.
+
+# The Fourier-Hadamard gate {#sec-fourier-hadamard}
+
+Let $V=C_2^2$ and $G=V\times C_q$, where $q$ is an odd prime and $t$ generates $C_q$. Write
+
+$$
+y=\sum_{v\in V}\sum_{j=0}^{q-1}c_{v,j}vt^j,
+\qquad c_{v,j}\in\mathbb N.
+$$
+
+For $\chi\in\widehat V$, define
+
+$$
+f_\chi(T)=\sum_ja_{\chi,j}T^j,
+\qquad
+a_{\chi,j}=\sum_{v\in V}\chi(v)c_{v,j}.
+$$ {#eq-hadamard-transform}
+
+The rational character decomposition is
+
+$$
+\mathbb Q[V\times C_q]\cong\mathbb Q^4\times\mathbb Q(\zeta_q)^4.
+$$
+
+Deleting the fully trivial component gives the exact integral-lattice determinant
+
+$$
+\det(m_{[y]})=
+\prod_{\chi\ne1}f_\chi(1)
+\prod_{\chi\in\widehat V}
+N_{\mathbb Q(\zeta_q)/\mathbb Q}(f_\chi(\zeta_q)).
+$$ {#eq-fourier-determinant}
+
+This is not merely a test in the rational Wedderburn algebra: the left side is the determinant of multiplication on the free integral quotient lattice. The class $[y]$ is a unit exactly when this integer equals $\pm1$. Conversely, channel data must reconstruct nonnegative integers through
+
+$$
+c_{v,j}=\frac14\sum_{\chi\in\widehat V}\chi(v)a_{\chi,j}.
+$$ {#eq-inverse-hadamard}
+
+Thus independent componentwise units do not automatically define a positive unit of the integral quotient order.
+
+Assume $q\ne3$ and $\varepsilon(y)=3$. Set $n_v=\sum_jc_{v,j}$. If $[y]$ is a unit, the three nontrivial values $f_\chi(1)$ are signs. Parseval for the order-four Hadamard matrix gives
+
+$$
+4\sum_vn_v^2=3^2+1^2+1^2+1^2=12.
+$$ {#eq-row-parseval}
+
+The $n_v$ are nonnegative integers summing to three, so their profile is $(1,1,1,0)$ up to permutation. Translation in $V\times C_q$ normalizes every candidate to
+
+$$
+y_{r,s}=1+e_1t^r+e_2t^s.
+$$ {#eq-normalized-candidate}
+
+The four cyclotomic channels are
+
+$$
+u_{\epsilon,\delta}
+=1+\epsilon\zeta_q^r+\delta\zeta_q^s,
+\qquad \epsilon,\delta\in\{\pm1\}.
+$$ {#eq-four-channels}
+
+::: {#res-four-channel-equivalence .result}
+**Theorem 8.1 (four-channel equivalence).** For every odd prime $q\ne3$,
+
+$$
+3\in U_+(C_2^2\times C_q)
+$$
+
+if and only if there exist $r,s\in\mathbb F_q$ for which all four elements in @eq-four-channels are units of $\mathbb Z[\zeta_q]$.
+:::
+
+::: {.proof}
+The forward direction is the profile reduction, @eq-fourier-determinant, and positivity. For the converse, @eq-normalized-candidate is already a positive integral lift. Its three nontrivial $V$-character values at $t=1$ are $1,1,-1$. If all four cyclotomic norms have absolute value one, @eq-fourier-determinant gives determinant $-1$, so $[y_{r,s}]$ is a unit.
+:::
+
+# Signed trinomials and the all-prime obstruction {#sec-signed-trinomials}
+
+## Integral unitary units are monomials {#sec-unitary-ratio}
+
+Let $R=\mathbb Z[C_q]=\mathbb Z[t]/(t^q-1)$ for odd $q$, with $t^*=t^{-1}$.
+
+For an arbitrary group $G$, the classical unitary-unit theorem for the standard involution states that
+$U_*(\mathbb ZG)=\{\pm g:g\in G\}$ [@Sehgal1993, Proposition 1.3; @BovdiParmenter1997, p. 369]. Applying it to $a(a^*)^{-1}$ proves the assertion below. We nevertheless include the direct cyclic Parseval proof because it is short and exposes the exact input used by the signed-trinomial argument.
+
+::: {#res-unitary-ratio .result}
+**Theorem 9.1 (classical unitary-unit specialization; Parseval proof).** If $a\in R^\times$ and $\varepsilon(a)=1$, then there is a unique $m\in\mathbb Z/q$ such that
+
+$$
+a(a^*)^{-1}=t^m.
+$$ {#eq-unitary-ratio}
+
+Consequently, if $2k=m$ in $\mathbb Z/q$, then $t^{-k}a$ is fixed by $*$.
+:::
+
+::: {.proof}
+Set $w=a(a^*)^{-1}=\sum_ic_it^i$. At every character $\chi_j(t)=\zeta_q^j$,
+
+$$
+\chi_j(a^*)=\overline{\chi_j(a)},
+\qquad
+|\chi_j(w)|=1.
+$$
+
+This includes the augmentation character. Fourier Parseval gives
+
+$$
+q\sum_ic_i^2=\sum_{j=0}^{q-1}|\chi_j(w)|^2=q.
+$$
+
+Because the $c_i$ are integers, exactly one coefficient is $+1$ or $-1$. Its sign is positive because $\varepsilon(w)=1$. Hence $w=t^m$. Since $q$ is odd, two is invertible modulo $q$; choosing $2k=m$ and rewriting $a=t^ma^*$ gives $(t^{-k}a)^*=t^{-k}a$.
+:::
+
+The modulus-one assertion applies to the global ratio $a(a^*)^{-1}$, not to $a$ itself.
+The unitary-unit classification in Theorem 9.1 is not claimed as new.
+
+## Exact norm-one classification {#sec-norm-one}
+
+Symmetric trinomial units and their powers have been studied previously [@KitaniSano2021], and later work gives unit criteria and inverse formulas for related trinomials over $RC_n$ [@HernandezMeloEtAl2025]. The result below is the exact signed cyclotomic-norm formulation needed for the UDS obstruction. It is presented as a rigorous repair and refinement of the claimed simple-trinomial classification in @Gorentas2020, not as the first study of trinomial units.
+
+::: {#res-signed-trinomial .result}
+**Theorem 9.2 (signed-trinomial norm one).** Let $q\ge5$ be prime, let $\zeta=\zeta_q$, and let $r,s\in\mathbb F_q$. Then
+
+$$
+N_{\mathbb Q(\zeta)/\mathbb Q}(1+\zeta^r-\zeta^s)=1
+$$
+
+if and only if
+
+$$
+s=0,\qquad s=r,\qquad\text{or}\qquad r=2s.
+$$ {#eq-norm-one-classification}
+:::
+
+::: {.proof}
+If $s=0$, the trinomial is $\zeta^r$; if $s=r$, it is $1$. If $r=0$ but $s\ne0$, then
+
+$$
+N(2-\zeta^s)=\Phi_q(2)=2^q-1>1.
+$$ {#eq-collision-rzero}
+
+Assume now that $0,r,s$ are distinct and the norm is one. Lift the trinomial to
+
+$$
+a=1+t^r-t^s\in\mathbb Z[C_q],\qquad\varepsilon(a)=1.
+$$
+
+The determinant of regular multiplication by $a$ is the augmentation times the cyclotomic norm, hence one. Therefore $a$ is an integral group-ring unit. Theorem 9.1 gives a shift $t^{-k}a$ fixed by $*$. Its unique coefficient $-1$ must occupy a star-fixed exponent. Since $q$ is odd, the only such exponent is zero, so $k=s$. The two distinct positive exponents $-s$ and $r-s$ are nonzero and must be exchanged by inversion. Thus $r-s=s$, or $r=2s$.
+
+Conversely, suppose $r=2s$ with $s\ne0$, and put $z=\zeta^s$. Then
+
+$$
+1-z+z^2=\frac{1+z^3}{1+z}.
+$$ {#eq-cyclotomic-unit-ratio}
+
+Both $z$ and $z^3$ are primitive because $q\ge5$, and
+
+$$
+N(1+u)=\Phi_q(-1)=1
+$$
+
+for every primitive $q$th root $u$. Hence the ratio has norm one.
+:::
+
+The hypothesis $q\ge5$ is real: at $q=3$, the numerator $1+z^3$ in @eq-cyclotomic-unit-ratio equals two.
+
+## No four simultaneous signed units {#sec-four-sign-obstruction}
+
+::: {#res-no-four .result}
+**Theorem 9.3 (four-sign obstruction).** For every prime $q\ge5$ and every $r,s\in\mathbb F_q$, at least one of
+
+$$
+1+\zeta^r+\zeta^s,\quad
+1+\zeta^r-\zeta^s,\quad
+1-\zeta^r+\zeta^s,\quad
+1-\zeta^r-\zeta^s
+$$
+
+is not a unit of $\mathbb Z[\zeta]$.
+:::
+
+::: {.proof}
+First suppose $r,s$ are nonzero and distinct. If all four elements were units, Theorem 9.2 applied to the second would give $r=2s$. Applied to the third, rewritten as $1+\zeta^s-\zeta^r$, it would give $s=2r$. Hence $3r=0$, impossible for $q\ge5$ and $r\ne0$.
+
+It remains to check every collision. If $r=0$ or $s=0$, one channel has the form $2-\zeta^a$ and @eq-collision-rzero excludes it. If $r=s\ne0$, one channel is $1+2\zeta^r$, whose norm is
+
+$$
+N(1+2\zeta^r)=\Phi_q(-2)=\frac{2^q+1}{3}>1.
+$$
+
+If $r=s=0$, the channel $3$ is not a unit. These cases exhaust all possibilities.
+:::
+
+Combining Theorems 8.1 and 9.3 gives
+
+$$
+3\notin U_+(C_2^2\times C_q)
+\qquad(q\ge5\text{ prime}).
+$$ {#eq-mixed-obstruction}
+
+Because $3$ is coprime to $4q$, Theorem 5.1 proves that none of these group rings has UDS.
+
+## Relation to prior trinomial-unit work and repair of a proof step {#sec-source-repair}
+
+Görentaş studies simple trinomial units in $\mathbb Z[C_p]$ [@Gorentas2020]. The relevant argument is the proof of Theorem 11 on pp. 1788--1789. As of August 31, 2026, the publisher record for that article does not link an erratum or corrigendum; this absence statement does not exclude a private or unindexed correction. In the displayed calculation spanning those pages, the proof identifies the inverse of an individual complex character value with its complex conjugate and then infers that the value has modulus one. That inference does not hold for a general integral group-ring unit. For an exact control at $q=5$,
+
+$$
+a=1-t+t^2=\frac{1+t^3}{1+t}
+$$
+
+is a group-ring unit, but at $t=\zeta_5$,
+
+$$
+|1-\zeta_5+\zeta_5^2|^2=\frac{7-3\sqrt5}{2}\ne1.
+$$ {#eq-source-countercontrol}
+
+This observation concerns that particular inference, not every statement surrounding it. The classical unitary-unit theorem, in the self-contained Parseval form of Theorem 9.1, supplies the valid replacement: all character values of the global ratio $a(a^*)^{-1}$ have modulus one, and integral Parseval forces that ratio to be a monomial. The support argument in Theorem 9.2 then recovers the needed symmetric form without assuming that the character values of $a$ itself lie on the unit circle.
+
+The scope should therefore be precise. Kitani and Sano had already studied the symmetric units $-1+g^j+g^{-j}$ and their powers [@KitaniSano2021]. Hernandez Melo, Diniz de Melo Hernandez, and Kitani later established unit criteria and constructed inverses for a related family over $RC_n$ [@HernandezMeloEtAl2025]. Neither the classical unitary-unit input nor the existence of symmetric trinomial units is claimed as new here. Theorem 9.2 contributes a corrected reduction and the exact norm-one formulation required for the four-channel obstruction; the cited later work does not supply the arbitrary-simple-trinomial reduction used in this paper.
+
+# The prime $q=3$: an exact finite certificate {#sec-q3-certificate}
+
+For $G=C_2^2\times C_3$, the obstruction dimension three is ramified, so the coprime necessity theorem does not apply. Dimension five is coprime to $|G|=12$.
+
+Represent $A_G=\mathbb Z[G]/\mathbb ZR_G$ by eliminating the identity basis vector. This is a free rank-eleven lattice. For a positive coefficient vector $c=(c_g)_{g\in G}$ of augmentation five, construct the $11\times11$ integer matrix of quotient left multiplication. Its class is a unit exactly when the determinant is $\pm1$.
+
+There are exactly
+
+$$
+\binom{5+12-1}{12-1}=4368
+$$
+
+such vectors. The deterministic audit enumerates all of them. Modular determinant filters at $101$, $103$, and $107$ leave no simultaneous survivor; in fact, no candidate has determinant $\pm1$ modulo $107$. Therefore no integral determinant is $\pm1$.
+
+::: {#cert-q3 .result}
+**Exact computational certificate 10.1.** There is no positive $y\in\mathbb Z[C_2^2\times C_3]$ of augmentation five whose class is a unit in $A_G$.
+
+The enumeration checks 4,368 vectors, finds zero units, and has enumeration/residue digest
+
+```text
+bf2ddd8dda89583df964ef210cb67e637e626267f8058bfe0e2a8dc78b732c4f
+```
+:::
+
+The certificate is finite, exact, and reproducible. It is not evidence extrapolated to larger primes. The [audit program](reproducibility/code/run_mixed_abelian_uds_audit.py), [source-level expectations](reproducibility/expected_certificate.py), and [focused regression tests](reproducibility/tests/) are included in the publication package. Generated JSON output is optional and is not an input to reproduction.
+
+Since $5\notin U_+(C_2^2\times C_3)$ and $(5,12)=1$, Theorem 5.1 gives
+
+$$
+\operatorname{UDS}(\mathbb Z[C_2^2\times C_3])\text{ is false}.
+$$ {#eq-q3-not-uds}
+
+# Proof of the finite-abelian classification {#sec-classification-proof}
+
+We can now assemble the preceding results.
+
+::: {#res-finite-abelian .result}
+**Theorem 11.1.** For every finite abelian group $G$,
+
+$$
+\operatorname{UDS}(\mathbb Z[G])
+\quad\Longleftrightarrow\quad
+G\text{ is cyclic or }G\cong C_2^2.
+$$
+:::
+
+::: {.proof}
+If $G$ is cyclic, Theorem 4.1 proves UDS. If $G=C_2^2$, @eq-low-exponent-uplus and modular nilpotence prove UDS through Corollary 5.4.
+
+Conversely, suppose $G$ is finite abelian and UDS. By quotient inheritance, every Sylow subgroup is UDS. Theorem 6.2 makes every odd Sylow subgroup cyclic and makes the $2$-Sylow subgroup cyclic or $C_2^2$. If the $2$-Sylow subgroup is cyclic, then $G$ is a product of cyclic groups of pairwise coprime orders and is cyclic.
+
+The only remaining shape is $C_2^2\times C_m$ with odd cyclic $m>1$. Choose an odd prime $q\mid m$. Then $G$ has quotient $C_2^2\times C_q$. If $q=3$, @eq-q3-not-uds says this quotient is not UDS. If $q\ge5$, @eq-mixed-obstruction and Theorem 5.1 say the quotient is not UDS. Either conclusion contradicts quotient inheritance. Hence no further abelian group is UDS.
+:::
+
+The proof uses quotient inheritance only in the direction
+
+$$
+\operatorname{UDS}(G)\Longrightarrow\operatorname{UDS}(Q).
+$$
+
+Equivalently, a non-UDS quotient obstructs UDS upstairs. No upward inference from a positive quotient is made.
+
+# Examples, interfaces, and boundaries {#sec-examples-boundaries}
+
+## Small examples {#sec-small-examples}
+
+The arithmetic invariant $U_+$ detects simple failures.
+
+| Group | Relevant quotient-unit fact | UDS verdict |
+|---|---:|---:|
+| $C_n$ | all smooth factors are obtained by Section 4 | yes |
+| $C_2^2$ | $U_+$ contains every odd integer | yes |
+| $C_3^2$ | $2\notin U_+$ | no |
+| $C_2\times C_4$ | $3\notin U_+$ | no |
+| $C_2^2\times C_3$ | $5\notin U_+$ by Certificate 10.1 | no |
+| $C_2^2\times C_q$, $q\ge5$ | $3\notin U_+$ symbolically | no |
+
+For $C_3^2$, the strictly positive element $x=1+R_G$ has augmentation ten and represents one modulo the regular line. If an augmentation-two factor divided a power, its class would have to be a quotient unit, contradicting $2\notin U_+(G)$. The analogous element for $C_2\times C_4$ has augmentation nine and exposes the missing dimension three.
+
+## Stable interface for subsequent work {#sec-interface}
+
+The following statements form the reusable interface of this paper.
+
+1. **Regular quotient:** $A_K=K/\mathbb Z\Omega$ and $U_+(K)$ records dimensions of positive lifts of integral quotient units.
+2. **Arithmetic tails:** $U_+(K)$ is a finite union of arithmetic tails indexed by $H_K=\bar d(A_K^\times)$; $H_K$ and the minimal lifts $\mu_r$ are the ring-specific data.
+3. **Perron lifting:** a positive quotient unit of dimension $M$ divides every sufficiently large primitive power for which $M\mid d(x)^N$.
+4. **Exact orbit:** divisibility by $y$ is equivalent to the $[1]$-orbit reaching zero in $K/yK$; the orbit space is finite when $L_y$ is rationally invertible.
+5. **Cyclic saturation:** primitive elements of $\mathbb N[C_n]$ admit exactly the smooth augmentation divisors.
+6. **UDS quantification:** UDS ranges over every primitive input and every smooth divisor.
+7. **Finite-abelian classification:** UDS holds exactly for cyclic groups and $C_2^2$.
+
+A single engineered primitive chain may have a full numerical index image even when its host based ring is not UDS. Such a construction exhibits selected factorizations for one input; it does not satisfy the universal quantifiers in Definition 2.3.
+
+## Boundaries beyond abelian groups {#sec-open-boundaries}
+
+The finite-abelian theorem does not extend automatically to nonabelian groups. Noncommutative rational components introduce reduced-norm constraints, while ramified positive extraction need not be controlled by an abelian Fourier decomposition. Positive examples for a particular group do not constitute a classification.
+
+Several boundaries are therefore explicit.
+
+- UDS is based-semiring data and is not known to be categorical Morita invariant.
+- UDS is not stable under tensor products: $\mathbb Z[C_2]$ and $\mathbb Z[C_4]$ are UDS, while $\mathbb Z[C_2\times C_4]$ is not.
+- The arithmetic-tail theorem determines the asymptotic shape of $U_+(K)$, but not the subgroup $H_K$ or the minimal positive-lift thresholds $\mu_r$.
+- The nilpotent modular-kernel criterion is sufficient, not generally necessary; the exact replacement is the orbit condition in $K/yK$.
+- Rationally invertible extractors have finite cokernel, but rationally singular, input-dependent factors prevent a uniform finite-state classification of ordinary UDS.
+- Rational or Wedderburn invertibility is weaker than integral quotient-unit membership.
+- The signed-trinomial theorem does not classify arbitrary-support cyclotomic units.
+- No classification of UDS for all nonabelian finite groups is asserted.
+
+# Reproducibility and verification {#sec-reproducibility}
+
+The manuscript is generated from this single Quarto source into semantic HTML and a searchable Typst PDF. The repository contains the complete local inputs needed for the mathematical regression controls and the exact $q=3$ certificate.
+
+All project-specific modules, tests, and expected outputs needed here are included in the repository. The build and reproduction scripts require no private checkout or sibling paper repository.
+
+The exact audit performs the following deterministic steps.
+
+1. Enumerate all weak compositions of five into twelve parts in lexicographic recursion order.
+2. Represent $A_G$ by eliminating the identity using $R_G=0$.
+3. Compute the quotient multiplication determinant modulo $101$, $103$, and $107$.
+4. Hash every coefficient vector and residue triple in the documented byte format.
+5. Compute an exact SymPy determinant only for modular survivors.
+6. Compare the in-memory result, including its SHA-256 digest, with source-level reference constants.
+
+The digest stream is defined independently of the implementation. Order the
+group basis lexicographically as
+$\{0,1\}\times\{0,1\}\times\{0,1,2\}$, with the last coordinate varying
+fastest. Order the weak compositions recursively by increasing first
+coefficient, then apply the same rule to the remaining coefficients. For each
+composition $(c_0,\ldots,c_{11})$, append the twelve coefficients as raw
+unsigned bytes (each lies in $\{0,\ldots,5\}$), the ASCII byte `|`, and the
+canonical determinant residues in $\{0,\ldots,p-1\}$ for
+$p=101,103,107$, written as unpadded comma-separated ASCII decimals. Terminate
+every record, including the last, with a single LF byte. The reported SHA-256
+value is the digest of the concatenation of all 4,368 records; there is no BOM,
+CR byte, header, or trailing data.
+
+The four-channel controls at $q=5$ give
+
+$$
+(r,s)=(1,2):\quad(1,11,1,11),
+$$
+
+and
+
+$$
+(r,s)=(2,1):\quad(1,1,11,11),
+$$
+
+for the absolute cyclotomic norms in the fixed channel order. These are regression controls for orientation and determinant assembly. They are not used to infer Theorem 9.2 or Theorem 9.3.
+
+See the [reproducibility guide](reproducibility/README.md) for exact commands and expected outputs.
+
+# Conclusion {#sec-conclusion}
+
+The regular element of an integral fusion based ring separates a positive divisor problem into integral quotient arithmetic and Perron mixing. A positive quotient unit supplies an exact signed complement, and the correct right-multiplication Perron limit makes that complement eventually positive. Cyclic group rings combine this mechanism with geometric sums and modular nilpotence to realize every smooth augmentation divisor.
+
+Universal divisor saturation packages that behavior as a uniform semiring property. Quotient-unit necessity, modular ramification, quotient inheritance, Fourier-Hadamard reduction, and the signed-trinomial norm theorem together give an exact finite-abelian classification: a finite abelian group ring is UDS precisely for cyclic groups and $C_2\times C_2$.
+
+The all-prime part of the mixed-Sylow obstruction is symbolic; the $q=3$ case is a separate exact finite certificate. The arithmetic invariant $U_+(K)$ is a finite union of arithmetic tails, but determining its unit-residue subgroup and minimal positive-lift thresholds remains ring-specific. General UDS has an exact orbit formulation in $K/yK$; for rationally invertible extractors this quotient is finite, while singular input-dependent extractors prevent a uniform finite-state classification. A classification for nonabelian finite groups also remains open. None of these remaining questions is resolved by finite-prime regression controls or by rational componentwise invertibility.

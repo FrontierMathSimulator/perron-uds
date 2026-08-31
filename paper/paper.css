@@ -1,0 +1,87 @@
+@font-face {
+  font-family: "Gelasio";
+  src: url("fonts/Gelasio-Roman-VF.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gelasio";
+  src: url("fonts/Gelasio-Italic-VF.ttf") format("truetype");
+  font-style: italic;
+  font-weight: 400 700;
+  font-display: swap;
+}
+
+:root {
+  --paper-ink: #17212b;
+  --paper-muted: #51606f;
+  --paper-accent: #145c72;
+  --paper-rule: #d8e0e5;
+  --paper-soft: #f5f8fa;
+}
+
+body {
+  color: var(--paper-ink);
+  font-family: "Gelasio", serif;
+  line-height: 1.64;
+}
+
+#quarto-content {
+  max-width: 1180px;
+}
+
+h1, h2, h3, h4 {
+  color: #102f3b;
+  font-family: "Segoe UI", Arial, sans-serif;
+  letter-spacing: -0.015em;
+}
+
+.title {
+  font-size: clamp(2rem, 4vw, 3.25rem);
+  line-height: 1.08;
+}
+
+.abstract {
+  border-left: 4px solid var(--paper-accent);
+  background: var(--paper-soft);
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0 2rem;
+}
+
+.result {
+  border-left: 3px solid var(--paper-accent);
+  background: var(--paper-soft);
+  padding: 0.8rem 1rem;
+  margin: 1.2rem 0;
+}
+
+.proof {
+  margin: 1rem 0 1.35rem;
+}
+
+/* Quarto supplies the visible .proof-title; suppress the theme's duplicate. */
+.proof::before {
+  content: none !important;
+  display: none !important;
+}
+
+table {
+  font-size: 0.94rem;
+}
+
+code, pre {
+  font-family: "Cascadia Mono", Consolas, monospace;
+}
+
+a {
+  color: var(--paper-accent);
+}
+
+.boundary {
+  border: 1px solid var(--paper-rule);
+  border-radius: 0.25rem;
+  padding: 0.8rem 1rem;
+  color: var(--paper-muted);
+}

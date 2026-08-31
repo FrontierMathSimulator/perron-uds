@@ -1,0 +1,8 @@
+project:
+  type: default
+
+link-citations: true
+lang: en-US
+
+execute:
+  freeze: true

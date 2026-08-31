@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+message: "Please cite the article in preferred-citation and archive the exact repository revision used."
+type: software
+title: "Perron Divisibility and Universal Divisor Saturation Reproducibility Package"
+authors:
+  - given-names: "John"
+    family-names: "Doe"
+date-released: 2026-08-31
+version: "0.1.0"
+license: CC0-1.0
+abstract: >-
+  Reproducibility package and publication sources for the finite-abelian
+  universal divisor saturation classification.
+keywords:
+  - fusion rings
+  - integral group rings
+  - Perron-Frobenius theory
+  - cyclotomic units
+  - finite abelian groups
+preferred-citation:
+  type: article
+  title: "Perron Divisibility and Universal Divisor Saturation in Integral Fusion Rings"
+  authors:
+    - given-names: "John"
+      family-names: "Doe"
+  year: 2026
