@@ -20,7 +20,10 @@ test -d docs/paper/manuscript_files
 mkdir -p docs/manuscript_files
 cp -R docs/paper/manuscript_files/. docs/manuscript_files/
 cp paper/paper.css docs/paper.css
-"$quarto_bin" render paper/manuscript.qmd --to typst --output-dir paper --output main.pdf
+rm -f main.pdf paper/main.pdf
+"$quarto_bin" render paper/manuscript.qmd --to typst --output main.pdf
+test -f main.pdf
+mv -f main.pdf paper/main.pdf
 "$quarto_bin" render paper/manuscript.qmd --to gfm --output-dir docs --output paper.md
 cp paper/main.pdf docs/paper.pdf
 "$python_bin" scripts/finalize-publication.py

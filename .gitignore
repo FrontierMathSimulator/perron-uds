@@ -10,6 +10,7 @@ _freeze/
 paper/main.typ
 paper/manuscript.typ
 paper/main.pdf
+/main.pdf
 docs/
 reproducibility/results/
 reproducibility/pinned_upstream/

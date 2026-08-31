@@ -51,8 +51,13 @@ try {
     Copy-Item -Path "$generatedAssets\*" -Destination "docs\manuscript_files" -Recurse -Force
     Copy-Item -LiteralPath "paper\paper.css" -Destination "docs\paper.css" -Force
 
-    & $Quarto render paper/manuscript.qmd --to typst --output-dir paper --output main.pdf
+    Remove-Item -LiteralPath "main.pdf", "paper\main.pdf" -Force -ErrorAction SilentlyContinue
+    & $Quarto render paper/manuscript.qmd --to typst --output main.pdf
     if ($LASTEXITCODE -ne 0) { throw "PDF render failed." }
+    if (-not (Test-Path -LiteralPath "main.pdf")) {
+        throw "Typst PDF was not generated at main.pdf."
+    }
+    Move-Item -LiteralPath "main.pdf" -Destination "paper\main.pdf" -Force
 
     & $Quarto render paper/manuscript.qmd --to gfm --output-dir docs --output paper.md
     if ($LASTEXITCODE -ne 0) { throw "Markdown render failed." }
