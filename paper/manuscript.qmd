@@ -56,7 +56,7 @@ format:
 
 **Editions and artifacts:** [download the formal PDF](paper.pdf), read the
 [Markdown edition](paper.md), or inspect the
-[complete reproducibility package](reproducibility/README.md).
+[complete reproducibility package](https://github.com/FrontierMathSimulator/perron-uds).
 
 Positive factorization in a based ring has two logically different parts. An exact factorization must first exist in the integral lattice, and the signed complementary factor must then become positive. In the setting of an integral fusion based ring, the regular element isolates the first problem in a finite-rank quotient, while Perron-Frobenius mixing solves the second. This paper develops that mechanism and uses it to classify a uniform divisor property for finite abelian group rings.
 
